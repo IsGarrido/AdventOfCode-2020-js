@@ -148,31 +148,29 @@ data = `35
 86`;
 
 data = data.split("\n").map(Number)
-data = data.sort((a,b) => a-b);
+data = data.sort((a, b) => a - b);
 console.log(data)
 
 
 let curr = 0;
 let diff1 = 0;
 let diff3 = 0;
-for(let i = -1; i < data.length; i++){
+for (let i = -1; i < data.length; i++) {
 
-	let next = data[i+1];
+	let next = data[i + 1];
 
 	console.log(curr, next)
-	if(next == curr+1){
+	if (next == curr + 1) {
 		curr += 1;
 		diff1++;
 		console.log("DIF 1");
-	} else if(next == curr+3){
+	} else if (next == curr + 3) {
 		curr += 3;
 		diff3++;
 		console.log("DIF 3")
-	} else {
-		console.error("wtf", "curr", curr, "pos", i, "val",data[i+1]);
 	}
 }
 
 diff3++;
-console.log(diff1, diff3, diff1*diff3);
+console.log(diff1, diff3, diff1 * diff3);
 

@@ -1,20 +1,20 @@
 class Form {
 
-	constructor(block){
+	constructor(block) {
 
-		let all = new Set( [...block.replace(/(?:\r\n|\r|\n)/g,"") ] );
+		let all = new Set([...block.replace(/(?:\r\n|\r|\n)/g, "")]);
 
 		let lines = block.split("\n");
 
 		let cont = 0;
 		all.forEach(c => {
-			let ok = lines.map(l => l.includes(c)).reduce((a,b) => a && b);
-			if(ok)
+			let ok = lines.map(l => l.includes(c)).reduce((a, b) => a && b);
+			if (ok)
 				cont++;
 		});
 
 		this.Total = cont;
-	}	
+	}
 }
 
 
@@ -2267,10 +2267,10 @@ msdqtukoipvfxlyjrabw
 lho
 hol
 jfolhv`
-.split("\n\n");
+	.split("\n\n");
 
 let res1 = data
-	.map( d => new Form(d).Total )
-	.reduce((a,b) => a+b);
+	.map(d => new Form(d).Total)
+	.reduce((a, b) => a + b);
 console.log(res1);
-	
+

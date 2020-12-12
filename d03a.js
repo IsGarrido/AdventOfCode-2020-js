@@ -1,30 +1,30 @@
-class Navigator{
+class Navigator {
 
-	constructor(levels){
+	constructor(levels) {
 
 		this.level = 0;
 		this.X = 0;
 		this.Y = 0;
 
 		this.levels = levels;
-		this.limit = levels.length-1;
+		this.limit = levels.length - 1;
 		this.size = levels[0].length;
 
 	}
 
-	Avanzar(addX, addY){
-		this.X = this.X+addX;
-		this.Y = this.Y+addY;
+	Avanzar(addX, addY) {
+		this.X = this.X + addX;
+		this.Y = this.Y + addY;
 
-		let val = this.levels[this.Y][this.X%this.size];
+		let val = this.levels[this.Y][this.X % this.size];
 		return val;
 	}
 
-	Run(addX, addY){
+	Run(addX, addY) {
 		let c = 0;
-		while(this.Y < this.limit){
+		while (this.Y < this.limit) {
 			let val = this.Avanzar(addX, addY);
-			if(val === "#") c++;
+			if (val === "#") c++;
 		}
 		this.X = 0;
 		this.Y = 0;
@@ -33,8 +33,8 @@ class Navigator{
 
 }
 
-let data = 
-`
+let data =
+	`
 ..##.......
 #...#...#..
 .#....#..#.
@@ -373,17 +373,17 @@ data = `
 .....#...#........##.........#.`;
 
 let levels = data.split("\n")
-levels.splice(0,1);
+levels.splice(0, 1);
 
 let nav = new Navigator(levels);
 
 let slopes = [
-	[1,1],
-	[3,1],
-	[5,1],
-	[7,1],
-	[1,2],
+	[1, 1],
+	[3, 1],
+	[5, 1],
+	[7, 1],
+	[1, 2],
 ];
 
-let res = slopes.map( x => nav.Run(...x) ).reduce((a, b) => a * b);
+let res = slopes.map(x => nav.Run(...x)).reduce((a, b) => a * b);
 console.log(res);

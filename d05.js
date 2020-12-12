@@ -1,6 +1,6 @@
 class Range {
 
-	constructor(min, max, cmin, cmax){
+	constructor(min, max, cmin, cmax) {
 
 		this.Min = min;
 		this.Max = max;
@@ -11,38 +11,38 @@ class Range {
 	}
 
 	get Middle() {
-		return Math.round((this.Min + this.Max)/2);
+		return Math.round((this.Min + this.Max) / 2);
 	}
 
-	get ColMiddle(){
-		return Math.floor((this.ColMin + this.ColMax)/2);
+	get ColMiddle() {
+		return Math.floor((this.ColMin + this.ColMax) / 2);
 	}
 
-	Update(l){
-		if(l == 'F')
+	Update(l) {
+		if (l == 'F')
 			this.Max = this.Middle;
-		else if( l == "B")
+		else if (l == "B")
 			this.Min = this.Middle;
-		else if( l == "L" )
+		else if (l == "L")
 			this.ColMax = this.ColMiddle;
-		else if(l == "R")
+		else if (l == "R")
 			this.ColMin = this.ColMiddle;
 		else
 			throw l + " no tiene buena pinta";
 	}
 
-	Decode(line){
+	Decode(line) {
 		this.Line = line;
-		for( let l of line ){
+		for (let l of line) {
 			//console.log(this,l);
 			this.Update(l);
 		}
 
-		let decoded = (this.Min * 8 ) + this.ColMax;
-		if(isNaN(decoded))console.log(this);
+		let decoded = (this.Min * 8) + this.ColMax;
+		if (isNaN(decoded)) console.log(this);
 		return decoded;
 	}
-	
+
 }
 
 
@@ -829,21 +829,21 @@ FBFBFBFLLR
 FFBFFFBRLR
 FBBFFFFRRR`.split("\n");
 
-let res = data.map(x => new Range(0,127, 0, 7).Decode(x) );
+let res = data.map(x => new Range(0, 127, 0, 7).Decode(x));
 let res1 = Math.max(...res);
 console.log(res1);
 
 let sorted = res.map(Number);
-sorted.sort(function(a, b) {
-  return a - b;
+sorted.sort(function (a, b) {
+	return a - b;
 })
 
 let min = sorted[0];
-let max = sorted[sorted.length-1]
+let max = sorted[sorted.length - 1]
 
-for(let i = 0; i < sorted.length; i++){
-	if(sorted[i]+1 != sorted[i+1])
-		console.log(sorted[i]+1);
+for (let i = 0; i < sorted.length; i++) {
+	if (sorted[i] + 1 != sorted[i + 1])
+		console.log(sorted[i] + 1);
 }
 
 

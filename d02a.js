@@ -1,5 +1,5 @@
-class Password{
-	constructor(line){
+class Password {
+	constructor(line) {
 
 		let parts = line.split(' ');
 		let p0 = parts[0];
@@ -14,8 +14,8 @@ class Password{
 		this.Password = p2;
 	}
 
-	IsValid(){
-		let ocurr = this.Password.split(this.Character).length -1;
+	IsValid() {
+		let ocurr = this.Password.split(this.Character).length - 1;
 		let ok = ocurr >= this.Min && ocurr <= this.Max;
 		return ok;
 	}
@@ -1020,7 +1020,10 @@ class Password{
 8-12 t: tttttttttttptt
 2-4 q: qxql
 3-4 v: vvxxv
-8-11 t: tttttttcttm`.split("\n").map(l => new Password(l)).filter(p => p.IsValid())/*.forEach(console.log);*/.length;
-			
-		
+8-11 t: tttttttcttm`.split("\n")
+	.map(l => new Password(l))
+	.filter(p => p.IsValid())
+	.length;
+
+
 

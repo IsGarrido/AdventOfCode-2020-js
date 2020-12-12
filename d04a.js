@@ -1,107 +1,107 @@
-class Passport{
+class Passport {
 
-	byrValid(data){
-		if(data.length != 4)
+	byrValid(data) {
+		if (data.length != 4)
 			return false;
 		let idata = parseInt(data);
-		if(idata < 1920)
+		if (idata < 1920)
 			return false;
-		if(idata > 2002)
+		if (idata > 2002)
 			return false;
 		return true;
 	}
 
-	iyrValid(data){
-		if(data.length != 4)
+	iyrValid(data) {
+		if (data.length != 4)
 			return false;
 		let idata = parseInt(data);
-		if(idata < 2010)
+		if (idata < 2010)
 			return false;
-		if(idata > 2020)
+		if (idata > 2020)
 			return false;
 		return true;
 	}
 
-	eyrValid(data){
-		if(data.length != 4)
+	eyrValid(data) {
+		if (data.length != 4)
 			return false;
 		let idata = parseInt(data);
-		if(idata < 2020)
+		if (idata < 2020)
 			return false;
-		if(idata > 2030)
+		if (idata > 2030)
 			return false;
 		return true;
 	}
 
-	hgtValid(data){
-		if(!data.includes("in") && !data.includes("cm"))
+	hgtValid(data) {
+		if (!data.includes("in") && !data.includes("cm"))
 			return false;
 
-		if(data.includes("cm")){
-			data = data.replace("cm","");
+		if (data.includes("cm")) {
+			data = data.replace("cm", "");
 			let idata = parseInt(data);
-			if(idata < 150)
+			if (idata < 150)
 				return false;
-			if(idata > 193)
+			if (idata > 193)
 				return false;
 			return true;
 		}
 
-		if(data.includes("in")){
-			data = data.replace("in","");
+		if (data.includes("in")) {
+			data = data.replace("in", "");
 			let idata = parseInt(data);
-			if(idata < 59)
+			if (idata < 59)
 				return false;
-			if(idata > 76)
+			if (idata > 76)
 				return false;
 			return true;
 		}
 
 	}
 
-	hclValid(data){
-		if(!data.includes("#"))
+	hclValid(data) {
+		if (!data.includes("#"))
 			return false;
 		return /^#[0-9A-F]{6}$/i.test(data);
 	}
 
-	eclValid(data){
-		return ["amb","blu","brn","gry","grn","hzl","oth"].indexOf(data) !== -1;
+	eclValid(data) {
+		return ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].indexOf(data) !== -1;
 	}
 
-	pidValid(data){
-		if(data.length != 9)
+	pidValid(data) {
+		if (data.length != 9)
 			return false;
 		return !Number.isNaN(data);
 	}
 
-	constructor(block){
+	constructor(block) {
 		this.Block = block;
 		block = block.replace(/(?:\r\n|\r|\n)/g, ' ');
-		this.Parts = block.split(" ").map( x => x.trim());
-		this.Keys = ["byr", "iyr", "eyr", "hgt",  "hcl", "ecl", "pid"/*, "cid"*/];
+		this.Parts = block.split(" ").map(x => x.trim());
+		this.Keys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"/*, "cid"*/];
 
 		this.Valid = this.IsValid();
 	}
 
-	getValue(key){
+	getValue(key) {
 		let part = this.Parts.find(x => x.includes(key));
-		if(!part) return false;
-		return part.replace(key,"");
+		if (!part) return false;
+		return part.replace(key, "");
 	}
 
-	IsValid(){
+	IsValid() {
 
-		for(let key of this.Keys ){
-			let key2 = key+":";
+		for (let key of this.Keys) {
+			let key2 = key + ":";
 			let val = this.getValue(key2);
-			if(!val)
+			if (!val)
 				return false;
 
-			let fun = this[key+"Valid"];
-			this["_"+key] = fun(val);
-			this["_"+key+":"] = val;
-			if(!this["_"+key]){
+			let fun = this[key + "Valid"];
+			this["_" + key] = fun(val);
+			this["_" + key + ":"] = val;
+			if (!this["_" + key]) {
 				return false;
 			}
 		}
@@ -1263,8 +1263,8 @@ ecl:#ae12d3 hgt:74cm cid:239 hcl:z pid:345439730 iyr:1924 byr:2029 eyr:2031
 `
 
 let res = data
-.split("\n\n")
-.map( x => new Passport(x) )
-.filter(y => y.Valid );
+	.split("\n\n")
+	.map(x => new Passport(x))
+	.filter(y => y.Valid);
 
 console.log(res.length)

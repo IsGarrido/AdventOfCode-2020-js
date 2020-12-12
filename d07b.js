@@ -598,18 +598,19 @@ data = data.split("\n"); //data.replace(/(?:\r\n|\r|\n)/g,"");
 let sum = -1; // = 0;
 
 let countBags = (bags, bag, qty) => {
+
     let line = bags.find(row => row.indexOf(`${bag} bags contain `) === 0);
     sum += qty;
-    if (!line.includes("no other bags")){
+    if (!line.includes("no other bags")) {
         let bagLines = line.replace(`${bag} bags contain `, "").replace(".", "").split(", ");
         bagLines.forEach(bagLine => {
-            let [ amount, adjective, color ] = bagLine.split(" ");
+            let [amount, adjective, color] = bagLine.split(" ");
             countBags(bags, `${adjective} ${color}`, qty * Number(amount));
         });
     }
 };
-    
+
 countBags(data, "shiny gold", 1);
 
 
-console.log("REQUIRED BAG COUNT: " + sum)
+console.log(sum)

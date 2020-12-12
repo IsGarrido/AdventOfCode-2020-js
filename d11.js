@@ -128,22 +128,22 @@ const DIRECTIONS = [
 	[1, 1]
 ];
 
-function get(m, y, x){
+function get(m, y, x) {
 	if (!m[y])
-		return ;
-	if(!m[y][x]) 
+		return;
+	if (!m[y][x])
 		return;
 	return m[y][x];
 }
 
-function set(y, x, adjacentCount){
+function set(y, x, adjacentCount) {
 
 	let val = lastMap[y][x];
 
 	if (val === STATUS.FREE && adjacentCount === 0) {
 		lastMap[y][x] = STATUS.USED;
 		return 1;
-	} 
+	}
 
 	if (val === STATUS.USED && adjacentCount >= 5) {
 		lastMap[y][x] = STATUS.FREE;
@@ -153,7 +153,7 @@ function set(y, x, adjacentCount){
 	return 0;
 }
 
-function getAdjacentOccupied(grid, y, x){
+function getAdjacentOccupied(grid, y, x) {
 	let c = 0;
 
 	DIRECTIONS.forEach(dir => {
@@ -176,11 +176,11 @@ function getAdjacentOccupied(grid, y, x){
 	return c;
 }
 
-function clone(){
+function clone() {
 	return JSON.parse(JSON.stringify(lastMap));
 }
 
-function run(m){
+function run(m) {
 	let changed = 0;
 
 	for (let y = 0; y < m.length; y++) {
@@ -200,8 +200,8 @@ while (changed !== 0) {
 }
 
 let res = lastMap
-			.flatMap(x => x )
-			.filter( x => x === STATUS.USED)
-			.length;
+	.flatMap(x => x)
+	.filter(x => x === STATUS.USED)
+	.length;
 
 console.log(res);

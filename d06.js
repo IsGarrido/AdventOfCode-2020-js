@@ -2246,8 +2246,8 @@ msdqtukoipvfxlyjrabw
 lho
 hol
 jfolhv`
-.split("\n\n")
-.map( l => l.replace(/(?:\r\n|\r|\n)/g,"") )
-.map( c => new Set([...c]))
-.map( s => s.size )
-.reduce((a,b) => a+b)
+    .split("\n\n")
+    .map(l => l.replace(/(?:\r\n|\r|\n)/g, ""))
+    .map(c => new Set([...c]))
+    .map(s => s.size)
+    .reduce((a, b) => a + b)

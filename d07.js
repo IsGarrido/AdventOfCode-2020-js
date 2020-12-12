@@ -593,17 +593,18 @@ light green bags contain 3 wavy lavender bags, 5 dim cyan bags.
 striped fuchsia bags contain 3 dotted green bags, 2 plaid maroon bags.
 wavy teal bags contain 4 muted olive bags, 2 muted purple bags.`
 
-data = data.split("\n"); //data.replace(/(?:\r\n|\r|\n)/g,"");
+data = data.split("\n");
 
 let rec = (lines, colors = {}) => bag => {
+
     lines.filter(line => line.indexOf(bag) > 0)
         .map(line => {
-            let [ color ] = line.split(" bags contain ");
+            let [color] = line.split(" bags contain ");
             colors[color] = 1;
             return color;
         })
         .forEach(rec(lines, colors));
-  
+
     return Object.keys(colors).length;
 };
 

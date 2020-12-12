@@ -200,8 +200,8 @@ let data = `1801
 1662`.split("\n").map(Number);
 
 
-console.log(data.flatMap( (x, i) => data.filter(y => y + x === 2020))
-.reduce( (l,r) => l*r ));
-			
-		
+console.log(data.flatMap((x, i) => data.filter(y => y + x === 2020))
+    .reduce((l, r) => l * r));
+
+
 

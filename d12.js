@@ -779,9 +779,7 @@ E2
 L180
 F95`.split("\n");
 
-//data = data.splice(0,100)
-
-let faces = ["E","S","W","N"]
+let faces = ["E", "S", "W", "N"]
 let facePos = 40000;
 
 let facing = () => faces[facePos % faces.length];
@@ -789,38 +787,37 @@ let facing = () => faces[facePos % faces.length];
 console.log(data);
 
 // Corregir el array para aplicar los giros y transformar F en la dirección que toca
-for(let i = 0; i < data.length; i++){
+for (let i = 0; i < data.length; i++) {
 
     let curr = data[i];
-    if ( curr.includes("F") ){
-        data[i] = data[i].replace("F",facing);
+    if (curr.includes("F")) {
+        data[i] = data[i].replace("F", facing);
     } else
-    if( curr.includes("R")){
-        let degrees = parseInt(curr.split("R").pop()); // 90
-        facePos += degrees / 90;
-        data[i] = "_".repeat(curr.length);
-    } else
-    if( curr.includes("L")){
-        let degrees = parseInt(curr.split("L").pop()); // 90
-        facePos -= degrees / 90;
-        data[i] = "_".repeat(curr.length);
-    }
+        if (curr.includes("R")) {
+            let degrees = parseInt(curr.split("R").pop()); // 90
+            facePos += degrees / 90;
+            data[i] = "_".repeat(curr.length);
+        } else
+            if (curr.includes("L")) {
+                let degrees = parseInt(curr.split("L").pop()); // 90
+                facePos -= degrees / 90;
+                data[i] = "_".repeat(curr.length);
+            }
 
 }
 
-data = data.filter( x => x);
+data = data.filter(x => x);
 
 console.log(data);
 
 let cX = 0; // +E -O
 let cY = 0; // +N -S
-for(let i = 0; i < data.length; i++){
+for (let i = 0; i < data.length; i++) {
     let curr = data[i];
     let dir = data[i][0];
-    let units = parseInt(curr.split("").splice(1, curr.length).join("")); // esto es pura magia
-    //console.log(dir,units);
+    let units = parseInt(curr.split("").splice(1, curr.length).join(""));
 
-    switch(dir){
+    switch (dir) {
         case "E":
             cX += units;
             break;
@@ -837,9 +834,9 @@ for(let i = 0; i < data.length; i++){
 
 }
 
-let mX = cX > 0 ? cX : cX*-1;
-let mY = cY > 0 ? cY : cY*-1;
+let mX = cX > 0 ? cX : cX * -1;
+let mY = cY > 0 ? cY : cY * -1;
 
 console.log(cX, cY);
-console.log(mX+mY)
+console.log(mX + mY)
 

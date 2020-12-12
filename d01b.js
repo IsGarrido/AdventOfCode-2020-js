@@ -199,10 +199,10 @@ let data = `1801
 1965
 1662`.split("\n").map(Number);
 
-for(let i = 0; i < data.length; i++)
-	for(let j = 0; j < data.length; j++)
-		for(let x = 0; x < data.length; x++)
-			if(data[i]+data[j]+data[x] === 2020)
-				return console.log(data[i]*data[j]*data[x]);
+for (let i = 0; i < data.length; i++)
+	for (let j = 0; j < data.length; j++)
+		for (let x = 0; x < data.length; x++)
+			if (data[i] + data[j] + data[x] === 2020)
+				return console.log(data[i] * data[j] * data[x]);
 
 

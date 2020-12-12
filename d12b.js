@@ -779,10 +779,7 @@ E2
 L180
 F95`.split("\n");
 
-//data = data.splice(0,100)
-
 console.log(data);
-
 
 let wX = 10;
 let wY = 1;
@@ -791,25 +788,25 @@ let cX = 0;
 let cY = 0;
 
 let facing = 0; // Este, derecha
-let maskX = [1,  1, -1, -1];
-let maskY = [1, -1,- 1,  1];
+let maskX = [1, 1, -1, -1];
+let maskY = [1, -1, - 1, 1];
 
 console.log(` W(${wX},${wY}) B(${cX},${cY}) `)
 
-for(let i = 0; i < data.length; i++){
+for (let i = 0; i < data.length; i++) {
 
     let curr = data[i];
     let key = curr[0];
     let units = parseInt(curr.split("").splice(1, curr.length).join("")); // esto es pura magia
 
-    switch(key){
+    switch (key) {
 
         case "F":
-            cX += wX*units;
-            cY += wY*units;
+            cX += wX * units;
+            cY += wY * units;
             break;
         case "L":
-            for(let si = 0; si < units; si+=90){
+            for (let si = 0; si < units; si += 90) {
                 let tempX = wX;
                 let tempY = wY;
 
@@ -818,7 +815,7 @@ for(let i = 0; i < data.length; i++){
             }
             break;
         case "R":
-            for(let si = 0; si < units; si+=90){
+            for (let si = 0; si < units; si += 90) {
                 let tempX = wX;
                 let tempY = wY;
                 wX = tempY;
@@ -843,8 +840,8 @@ for(let i = 0; i < data.length; i++){
 
 }
 
-let mX = cX > 0 ? cX : cX*-1;
-let mY = cY > 0 ? cY : cY*-1;
+let mX = cX > 0 ? cX : cX * -1;
+let mY = cY > 0 ? cY : cY * -1;
 
 console.log(cX, cY);
-console.log(mX+mY)
+console.log(mX + mY)

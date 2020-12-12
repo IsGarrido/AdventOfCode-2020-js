@@ -1,6 +1,6 @@
-class Boot{
+class Boot {
 
-	constructor(program){
+	constructor(program) {
 		this.accumulator = 0;
 		this.current = 0;
 		this.visitedPos = new Set();
@@ -8,52 +8,52 @@ class Boot{
 		this.instructions = program.split("\n").filter(Boolean);
 
 		let res = this.run();
-		if(res != -1)
+		if (res != -1)
 			this.ended = true;
 
 	}
 
-	acc(val){
+	acc(val) {
 		this.accumulator += val;
 		this.current++;
 
 	}
 
-	jmp(offset){
+	jmp(offset) {
 		this.current += offset;
 	}
 
-	nop(){
+	nop() {
 		this.current++;
 
 	}
 
-	visit(val){
-		if(this.visitedPos.has(val))
+	visit(val) {
+		if (this.visitedPos.has(val))
 			return false;
 		this.visitedPos.add(val);
 		return true;
 	}
 
-	run(){
-		while(this.current != this.instructions.length){
+	run() {
+		while (this.current != this.instructions.length) {
 			let line = this.instructions[this.current];
 			let loop = this.runLine(line);
-			if(loop)
+			if (loop)
 				return -1;
 		}
 		//console.log("CONSEGUIDO                   X " + this.accumulator)
 		return this.accumulator;
 	}
 
-	runLine(line){
-		let [ instruction, val ] = line.split(" ");
-		 val = Number(val);
+	runLine(line) {
+		let [instruction, val] = line.split(" ");
+		val = Number(val);
 
 		let loop = !this.visit(this.current);
 		//console.log(line, p, val, this.visitedPos, loop);
 
-		if(!loop)
+		if (!loop)
 			this[instruction](val);
 		return loop;
 
@@ -64,42 +64,42 @@ class Boot{
 
 class Program {
 
-	constructor(program){
+	constructor(program) {
 		this.instructions = program.split("\n").filter(Boolean);
 		this.accumulator = -1;
 		this.run();
 	}
 
-	run(){
+	run() {
 		let line = 0;
 		let ok = true;
-		while(ok){
+		while (ok) {
 
-			if(this.instructions.length < line) return false;
+			if (this.instructions.length < line) return false;
 			//console.log("Evaluando linea " + line + " " + this.instructions[line])
-			if(this.instructions[line].includes("jmp")){
+			if (this.instructions[line].includes("jmp")) {
 
 				this.instructions[line] = this.instructions[line].replace("jmp", "nop");
 				let program = new Boot(this.instructions.join("\n"));
-				if(program.ended){
+				if (program.ended) {
 					//console.log(program.accumulator)
 					this.accumulator = program.accumulator;
 					ok = false;
 				}
-				this.instructions[line] = this.instructions[line].replace("nop", "jmp");				
+				this.instructions[line] = this.instructions[line].replace("nop", "jmp");
 			}
 
-			else if(this.instructions[line].includes("nop")){
-				
+			else if (this.instructions[line].includes("nop")) {
+
 				this.instructions[line] = this.instructions[line].replace("nop", "jmp");
 				let program = new Boot(this.instructions.join("\n"));
-				if(program.ended){
+				if (program.ended) {
 
 					this.accumulator = program.accumulator;
 					ok = false;
 					//return true;
 				}
-				this.instructions[line] = this.instructions[line].replace("jmp", "nop");				
+				this.instructions[line] = this.instructions[line].replace("jmp", "nop");
 			}
 
 			line++;
@@ -778,10 +778,5 @@ acc +1
 nop -4
 acc +6`;
 
-//console.log(new Boot(data2).ended)
-
 let p = new Program(data);
 console.log(p.accumulator);
-//let boot = new Boot(data);
-
-//console.log(boot.accumulator, boot.ended);

@@ -997,22 +997,24 @@ let data = `10
 55223428789495
 57720490173052
 57593677669241
-67897679576611`.split("\n").map(Number);
+67897679576611`
+	.split("\n")
+	.map(Number);
 
 let limit = 25;
 let res = -1;
-for(let i = limit; i < data.length; i++){
+for (let i = limit; i < data.length; i++) {
 
 	let ok = false;
-	for(let p1 = i - limit; p1<i; p1++ ){
-		for(let p2 = i - limit; p2 < i; p2++){
-			if(!ok && data[p1] + data[p2] === data[i]){
+	for (let p1 = i - limit; p1 < i; p1++) {
+		for (let p2 = i - limit; p2 < i; p2++) {
+			if (!ok && data[p1] + data[p2] === data[i]) {
 				ok = true
 			}
 		}
 	}
 
-	if(!ok){
+	if (!ok) {
 		res = data[i];
 		break;
 	}
@@ -1031,17 +1033,17 @@ for (let pos = 0; pos < data.length; pos++) {
 		let val = data[i];
 		current += val;
 
-	if (current > res) //se pasa
-		break;
+		if (current > res) //se pasa
+			break;
 
-	if (val > max) 
-		max = val;
+		if (val > max)
+			max = val;
 
-	if (val < min) 
-		min = val;
-	  
-	if (current === res && min !== max)
-		console.log(min, max, min + max);
-	  
+		if (val < min)
+			min = val;
+
+		if (current === res && min !== max)
+			console.log(min, max, min + max);
+
 	}
 }

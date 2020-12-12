@@ -1,5 +1,5 @@
-class Password{
-	constructor(line){
+class Password {
+	constructor(line) {
 
 		let parts = line.split(' ');
 		let p0 = parts[0];
@@ -8,19 +8,19 @@ class Password{
 
 		let range = p0.split('-');
 
-		this.Check1 = parseInt(range[0])-1;
-		this.Check2 = parseInt(range[1])-1;
+		this.Check1 = parseInt(range[0]) - 1;
+		this.Check2 = parseInt(range[1]) - 1;
 		this.Character = p1[0];
 		this.Password = p2;
 
 		this.Line = line;
 	}
 
-	Get(index){
+	Get(index) {
 		return this.Password[index];
 	}
 
-	IsValid(){
+	IsValid() {
 		let c1 = this.Password[this.Check1];
 		let c2 = this.Password[this.Check2];
 
@@ -1031,13 +1031,13 @@ let data = `6-10 p: ctpppjmdpppppp
 2-4 q: qxql
 3-4 v: vvxxv
 8-11 t: tttttttcttm`
-.split("\n");
+	.split("\n");
 
 
 let res = data.map(l => new Password(l))
-.filter(p => p.IsValid()).length;
+	.filter(p => p.IsValid()).length;
 
 console.log(res);
-			
-		
+
+
 
